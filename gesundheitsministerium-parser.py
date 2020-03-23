@@ -22,33 +22,33 @@ def get_ministerium_data(query):
     raw_data = response[response.find("= [")+3:response.find("];")]
     return raw_data
 
-def build_json(raw_data, label):
+def build_metric(raw_data, label):
     data_dict = ast.literal_eval(raw_data)
     export_json = []
 
     for datapoint in data_dict:
-        new_point = {label : datapoint['label'], "value" : datapoint['y']}
+        new_point = {label: datapoint['label'], "value": datapoint['y']}
         export_json.append(new_point.copy())
+   
     return json.dumps(export_json, ensure_ascii=False)
 
 def parse_simple_data(raw_data):
     erkrankungen = raw_data[raw_data.find("gen = ")+6:raw_data.find(";")]
     hospitalisiert = raw_data[raw_data.find("ert = ")+6:raw_data.find(";\nvar Int")]
     intensiv = raw_data[raw_data.find("ion = ")+6:raw_data.find(";\nvar Le")]
-    
+
     return {"Erkrankungen":erkrankungen,"Hospitalisiert":hospitalisiert,"Intensiv":intensiv}
 
 def build_output():
-    output = parse_simple_data(get_ministerium_data(simpledata_query))
+    metrics = parse_simple_data(get_ministerium_data(simpledata_query))
 
     for query in json_queries:
         label = query['label']
         query = query['query']
         
-        current_data = {query:{}}
-        current_data[query] = ast.literal_eval(build_json(get_ministerium_data(query), label))
-       
-        output.update(current_data)
-    return json.dumps(output, ensure_ascii=False)
+        current_data = ast.literal_eval(build_metric(get_ministerium_data(query), label))
+        metrics[query] = current_data
 
-print(build_output())
+    print(json.dumps(metrics, ensure_ascii=False))
+
+build_output()
