@@ -26,11 +26,9 @@ def get_data(query):
     else:
         json_text = re.search(r'^var.*\s*=\s*(\[\{.*?\}\])\s*;$', str(text), flags=re.DOTALL).group(1)
         data = json.loads(json_text)
-        print(query, data)
         return data
 
 for x in queries:
     output[x] = get_data(x)
 
 print(json.dumps(output,indent=2))
-
