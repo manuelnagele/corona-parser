@@ -3,8 +3,6 @@
 
 import requests
 import json
-from jsonpath_ng import jsonpath, parse
-from datetime import date
 import ast
 import codecs
 
