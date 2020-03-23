@@ -7,16 +7,27 @@ import re
 
 ministerium_url = "https://info.gesundheitsministerium.at/data/"
 
-simpledata_query = "SimpleData"
-
-queries = ['Geschlechtsverteilung', 'Altersverteilung', 'Bezirke', 'Bundesland']
+queries = ['Geschlechtsverteilung', 'Altersverteilung', 'Bezirke', 'Bundesland', 'SimpleData']
 
 output = {}
 
 def get_data(query):
-    text = urlopen(ministerium_url + query + '.js').read().decode('utf-8').rstrip()
-    json_text = re.search(r'^var.*\s*=\s*(\[\{.*?\}\])\s*;$', str(text), flags=re.DOTALL).group(1)
-    return json.loads(json_text)
+    text = urlopen(ministerium_url + query + '.js').read().decode('utf-8')
+    if query == 'SimpleData':
+        data = []
+        simplematch = re.compile(r'^var\s(.*)\s=\s(\d.*);$')
+        for line in text.split('\n'):
+            try:
+                data.append({simplematch.search(line).group(1):simplematch.search(line).group(2)})
+            except:
+                pass
+        return data
+
+    else:
+        json_text = re.search(r'^var.*\s*=\s*(\[\{.*?\}\])\s*;$', str(text), flags=re.DOTALL).group(1)
+        data = json.loads(json_text)
+        print(query, data)
+        return data
 
 for x in queries:
     output[x] = get_data(x)
