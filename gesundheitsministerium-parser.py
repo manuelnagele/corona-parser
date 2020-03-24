@@ -8,9 +8,8 @@ import re
 
 ministerium_url = "https://info.gesundheitsministerium.at/data/"
 
-#queries = ['Geschlechtsverteilung', 'Altersverteilung', 'Bezirke', 'Bundesland', 'SimpleData']
+queries = ['Geschlechtsverteilung', 'Altersverteilung', 'Bezirke', 'Bundesland', 'SimpleData']
 
-queries = ['Bezirke']
 
 output = {}
 
@@ -31,10 +30,7 @@ def get_data(query):
       
         if query == 'Bezirke':
             for district in data:
-                try:
-                    district.update(get_geodata_for_district(district['label']))
-                except:
-                    print("Couldnt find geodata for: " + district['label'])
+                district.update(get_geodata_for_district(district['label']))
         return data
 
 def add_geodata(data):
