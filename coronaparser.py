@@ -21,6 +21,10 @@ for country in raw_corona_data:
         country['country_code'] = 'GBR'
         continue
 
+    if country_name == 'Laos':
+        country['country_code'] = 'LAO'
+        continue
+
     if country_name == 'S. Korea':
         country['country_code'] = 'KOR'
         continue
