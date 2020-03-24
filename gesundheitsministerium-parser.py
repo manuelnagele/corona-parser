@@ -6,8 +6,14 @@ from geodatahelper import get_geodata_for_district
 import json
 import re
 
-ministerium_url = "https://info.gesundheitsministerium.at/data/"
-queries = ['Geschlechtsverteilung', 'Altersverteilung', 'Bezirke', 'Bundesland', 'SimpleData']
+with open("./config.json") as config_file:
+    config = json.load(config_file)
+
+write_to_file = config['logging']['write_to_file']
+file_location = config['logging']['file_location']
+ministerium_url = config['datasource']['ministerium_url']
+queries = config['datasource']['queries']
+
 output = {}
 
 def get_data(query):
@@ -32,4 +38,8 @@ def get_data(query):
 for x in queries:
     output[x] = get_data(x)
 
-print(json.dumps(output,indent=2))
+if write_to_file:
+    with open(file_location, "w") as file:
+        file.write(json.dumps(output, indent=2, ensure_ascii=False))
+else:
+    print(json.dumps(output,indent=2))
