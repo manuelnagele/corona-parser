@@ -33,14 +33,6 @@ def get_data(query):
                 district.update(get_geodata_for_district(district['label']))
         return data
 
-def add_geodata(data):
-    new_data = []
-    for district in data:
-        district.update(get_geodata_for_district(district['label']))
-        new_data.append(district)
-
-    return new_data
-
 for x in queries:
     output[x] = get_data(x)
 
