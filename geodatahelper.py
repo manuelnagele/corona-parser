@@ -16,5 +16,4 @@ def get_geodata_for_country(key):
     for country in world_geodata:
         if country['country_name'] == key:
             return country['country_code']
-
-print(get_geodata_for_country("UK"))
+    return "IDK"

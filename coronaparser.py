@@ -24,5 +24,5 @@ for country in raw_corona_data:
     country['country_code'] = get_geodata_for_country(country_name)
     updated_corona_data.append(country)
 
-print(json.dumps(updated_corona_data))
+print(json.dumps(updated_corona_data, indent=2, ensure_ascii=False))
 
