@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pycountry
 import requests
 import json
@@ -57,10 +58,9 @@ for country in raw_corona_data:
     if country_name == 'U.S. Virgin Islands':
         country['country_code'] = 'VIR'
         continue
-    
+
     country['country_code'] = pycountry.countries.search_fuzzy(country_name)[0].alpha_3
     updated_corona_data.append(country)
-
 
 print(json.dumps(updated_corona_data))
 
