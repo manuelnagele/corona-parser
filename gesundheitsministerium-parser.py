@@ -40,8 +40,10 @@ def get_data(query):
 for x in queries:
     output[x] = get_data(x)
 
+output = json.dumps(output, indent=2, ensure_ascii=False))
+
 if write_to_file:
     with open(file_location, "w") as file:
-        file.write(json.dumps(output, indent=2, ensure_ascii=False))
+        file.write(output)
 else:
-    print(json.dumps(output,indent=2))
+    print(output)
