@@ -18,7 +18,7 @@ def get_data(query):
         simplematch = re.compile(r'^var\s(.*)\s=\s(\d.*);$')
         for line in text.split('\n'):
             try:
-                data.append({simplematch.search(line).group(1):simplematch.search(line).group(2)})
+                data.append({"label":simplematch.search(line).group(1),"y":int(simplematch.search(line).group(2))})
             except:
                 pass
         return data
