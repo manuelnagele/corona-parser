@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 from urllib.request import urlopen
@@ -7,10 +7,7 @@ import json
 import re
 
 ministerium_url = "https://info.gesundheitsministerium.at/data/"
-
 queries = ['Geschlechtsverteilung', 'Altersverteilung', 'Bezirke', 'Bundesland', 'SimpleData']
-
-
 output = {}
 
 def get_data(query):
@@ -27,7 +24,6 @@ def get_data(query):
     else:
         json_text = re.search(r'^var.*\s*=\s*(\[\{.*?\}\])\s*;$', str(text), flags=re.DOTALL).group(1)
         data = json.loads(json_text)
-      
         if query == 'Bezirke':
             for district in data:
                 district.update(get_geodata_for_district(district['label']))
