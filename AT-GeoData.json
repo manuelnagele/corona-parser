@@ -24,6 +24,7 @@
 {"name": "Hartberg-Fürstenfeld", "geodata": {"lat":"47.2478715", "lon":"15.9284805"}},
 {"name": "Hermagor", "geodata": {"lat":"46.6538637", "lon":"13.100262"}},
 {"name": "Hollabrunn", "geodata": {"lat":"48.5625384", "lon":"16.0798033"}},
+{"name": "Horn", "geodata": {"lat":"48.665436", "lon":"15.656622"}},
 {"name": "Imst", "geodata": {"lat":"47.2381536", "lon":"10.7406982"}},
 {"name": "Innsbruck-Land", "geodata": {"lat":"47.176657", "lon":"11.252552"}},
 {"name": "Innsbruck-Stadt", "geodata": {"lat":"47.2655707", "lon":"11.3934374"}},
