@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import pycountry
 import requests
 import json
 from geodatahelper import get_geodata_for_country
@@ -24,5 +23,7 @@ for country in raw_corona_data:
     country['country_code'] = get_geodata_for_country(country_name)
     updated_corona_data.append(country)
 
-print(json.dumps(updated_corona_data, indent=2, ensure_ascii=False))
+output = json.dumps(updated_corona_data, indent=2, ensure_ascii=False)
 
+with open("./coronadata.json", "w") as file:
+    file.write(output)
